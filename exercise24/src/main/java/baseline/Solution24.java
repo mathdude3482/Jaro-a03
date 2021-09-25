@@ -11,28 +11,29 @@ import java.util.Scanner;
 // which takes in two words as its arguments and returns true or false.
 public class Solution24 {
     private static final Scanner in = new Scanner(System.in);
+    //Declare three strings: word1, word2, and the result.
+    private String word1;
+    private String word2;
+    private String result;
     public static void main(String[] args) {
         Solution24 app = new Solution24();
-        //Declare two strings word1 and word2.
-        String word1;
-        String word2;
         //Ask the user to input data for word1.
-        word1 = app.getWord();
+        app.word1 = app.getWord("Enter the first word:");
         //Ask the user to input data for word2.
-        word2 = app.getWord();
+        app.word2 = app.getWord("Enter the second word:");
         //determine if the two words are anagrams.
-        String result = app.isAnagram();
+        String result = app.isAnagram(app.word1, app.word2);
         //print out the result.
         System.out.println(result);
     }
-    private String getWord() {
-        //take in input prompt as a parameter.
+    //take in input prompt as a parameter.
+    private String getWord(String prompt) {
         //print out the input prompt.
-        //read in the word.
-        //return the word as a string.
-        return null;
+        System.out.println(prompt);
+        //read the word and return the word as a string.
+        return in.nextLine();
     }
-    private String isAnagram() {
+    private String isAnagram(String word1, String word2) {
         //take in two word strings as a parameter.
         //determine if the words are anagrams.
         //return the result.
