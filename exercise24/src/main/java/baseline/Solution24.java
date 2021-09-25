@@ -37,7 +37,7 @@ public class Solution24 {
         return in.nextLine();
     }
     //take in two word strings as a parameter.
-    private boolean isAnagram(String word1, String word2) {
+    public boolean isAnagram(String word1, String word2) {
         //determine if the words are anagrams.
         String first = word1.replaceAll("\\s", "");
         String second = word2.replaceAll("\\s", "");
