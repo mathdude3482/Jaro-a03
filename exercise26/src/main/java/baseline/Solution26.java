@@ -1,7 +1,4 @@
 package baseline;
-
-import java.util.Scanner;
-
 /*
  *  UCF COP3330 Fall 2021 Assignment 3 Solutions
  *  Copyright 2021 James Jaro
@@ -16,34 +13,18 @@ import java.util.Scanner;
 //Prompt for the APR as a percentage, not a decimal.
 //Round fractions of a cent up to the next cent for internal calculations.
 public class Solution26 {
-    private static final Scanner in = new Scanner(System.in);
-    private double balance;
-    private double APR;
-    private double payment;
-    private int numMonth;
-    private String result;
     public static void main(String[] args) {
-        Solution26 app = new Solution26();
-        //ask the user for their balance, the APR (as a percentage), and the monthly payment.
-        app.balance = app.getInfo();
-        app.APR = app.getInfo();
-        app.payment = app.getInfo();
         //call a class called PaymentCalculator,
         // which contains a method called calculateMonthsUntilPaidOff.
         //that will calculate the number of months needed to pay off a credit card balance.
         PaymentCalculator myData = new PaymentCalculator();
-        app.numMonth = myData.calculateMonthsUntilPaidOff();
+       int numMonth = myData.calculateMonthsUntilPaidOff();
         //print out the output.
-        app.result = app.displayOutput();
+        System.out.println(displayOutput(numMonth));
     }
-    private double getInfo() {
-        //take in a String prompt as a parameter. Print the prompt.
-        //return the user input.
-        return 0;
-    }
-    private String displayOutput() {
+    private static String displayOutput(int month) {
         //take in one parameter: the number of months.
         //print out the result.
-        return "";
+        return "It will take you " + month + " months to pay off this card.";
     }
 }
