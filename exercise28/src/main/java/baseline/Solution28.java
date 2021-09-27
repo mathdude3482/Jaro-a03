@@ -10,25 +10,16 @@ import java.util.Scanner;
 //The prompting must use repetition, such as a counted loop, not three separate prompts.
 public class Solution28 {
     private static final Scanner in = new Scanner(System.in);
-    private static final String MESSAGE = "enter a number:";
-    private static int num1;
-    private static int num2;
-    private static int num3;
-    private static int num4;
-    private static int num5;
     public static void main(String[] args) {
-       //Using a for loop, ask the user for 5 numbers.
+        //Using a for loop, ask the user for 5 numbers.
         //enter for loop here:
-        for (int i = 0; i < 1; i++) {
-             num1 = getNum(MESSAGE);
-             num2 = getNum(MESSAGE);
-             num3 = getNum(MESSAGE);
-             num4 = getNum(MESSAGE);
-             num5 = getNum(MESSAGE);
+        int[] num = new int[5];
+        for (int i = 0; i <= 4; i++) {
+          num[i] = getNum("Enter a number:");
         }
-       //Calculate the sum of the 5 numbers.
-       int sum = getSum(num1, num2, num3, num4, num5);
-       //Display the sum.
+        //Calculate the sum of the 5 numbers.
+        int sum = getSum(num);
+        //Display the sum.
         String result = displaySum(sum);
         System.out.println(result);
     }
@@ -38,10 +29,10 @@ public class Solution28 {
         //return the user input.
         return in.nextInt();
     }
-    public static int getSum(int first, int second, int third, int fourth, int fifth) {
+    public static int getSum(int[] num) {
         //pass in 5 parameters: the 5 numbers the user inputted.
         //return the sum.
-        return first + second + third + fourth + fifth;
+        return num[0] + num[1] + num[2] + num[3] + num[4];
     }
     private static String displaySum(int sum){
         //pass in one parameter: the sum.
