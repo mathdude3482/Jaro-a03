@@ -1,5 +1,9 @@
 package baseline;
 import java.util.Scanner;
+import static baseline.GetData.*;
+import static baseline.PlayGame.*;
+import static baseline.ValidateInput.validInput;
+
 /*
  *  UCF COP3330 Fall 2021 Assignment 3 Solutions
  *  Copyright 2021 James Jaro
@@ -17,63 +21,72 @@ import java.util.Scanner;
 //Don’t allow any non-numeric data entry.
 //During the game, count non-numeric entries as wrong guesses.
 public class Solution32 {
-    private final static Scanner in = new Scanner(System.in);
-    private static String difficulty;
-    private static int numGuesses;
     public static void main(String[] args) {
         //use a while loop to run the program.
         // The while loop runs while a control variable x is less than 1.
-        //prompt the user for a difficulty.
+        System.out.println("Let's play guess the number!");
+        System.out.println();
+        int x = 0;
         //enter the while loop here.
-        difficulty = getDifficulty();
+        while(x < 1){
+        //prompt the user for a difficulty.
+        String difficulty = getDifficulty("Enter a difficulty(1, 2, or 3):");
         //check the user input for difficulty if it is 1, 2, or 3.
-        validInput();
-        //If the user does not check out to be 1,2 or 3, end the program by adding 1 to x.
-        //Otherwise, convert the input into an integer.
-        int level = convertDifficulty();
-        // call the difficultyLevel method. This will return the number of guesses a user
-        //needed to guess the correct answer.
-        numGuesses = difficultyLevel();
-        //Display the number of guesses a user needed using the displayOutput method.
-       String result = displayOutput();
-        //ask if the user wants to play again.
-        Scanner again = new Scanner(System.in);
-        String play = again.nextLine();
-        //if the user doesn't want to play again, add 1 to the control variable of the while loop.
+        if(!(validInput(difficulty)))
+            {
+                //If the input does not check out to be 1,2 or 3 (or some combination of the values),
+                // keep asking the user to input a correct value.
+                System.out.println("Incorrect input.");
+            }
+        else
+            {
+                //otherwise, add one and stop the loop.
+                //turn the String into an integer.
+                //take out any whitespaces if there is any.
+                String revisedDifficulty = difficulty.replaceAll("\\s", "");
+                int level = convertDifficulty(revisedDifficulty);
+                // call the difficultyLevel method. This will return the number of guesses a user
+                //needed to guess the correct answer.
+                int numGuess = difficultyLevel(level);
+                //Display the number of guesses a user needed using the displayOutput method.
+                String result = displayOutput(numGuess);
+                System.out.println(result);
+                //ask if the user wants to play again.
+                Scanner again = new Scanner(System.in);
+                System.out.println();
+                System.out.print("Do you want to play again? (Y/N)");
+                String play = again.nextLine();
+                //if the user doesn't want to play again,
+                // add 1 to the control variable of the while loop to stop the program.
+                if(play.equals("N") || play.equals("n")){
+                 x++;
+                }
+            }
+        }
     }
-    private static String getDifficulty() {
-        //pass in one parameter: the prompt. Print out the prompt.
-        //return the user input.
-        return "";
-    }
-    public static boolean validInput(){
-        //pass in one parameter: the user input.
-        //Using Java Regex, if the input is not 1,2 or 3, return false.
-        //otherwise, return true.
-        return true;
-    }
-    private static int convertDifficulty() {
-        //pass in one parameter: the user input.
-        //return the level of difficulty as an integer.
+    //pass in one parameter: the difficulty level.
+    private static int difficultyLevel(int level) {
+        //based on the difficulty level, the program will call a function from PlayGame that goes with
+        //the corresponding difficulty.
+        if(level == 1){
+            return level1();
+        }
+        else if(level == 2){
+            return level2();
+        }
+        else if(level == 3){
+            return level3();
+        }
+        //return 0 if level is not 1, 2, or 3, to indicate that the input is invalid.
         return 0;
     }
-    private static int difficultyLevel() {
-        //pass in one parameter: the difficulty level.
-        //based on the difficulty level, the program will choose a number from a given range.
-        //prompt the user to guess what the number is.
-        //if the user guesses incorrectly, the program will prompt either too high or too low
-        //depending on the user input.
-        //record the number of guesses using numGuesses. After a user guesses, add 1 to numGuesses.
-        //if the guess is incorrect, keep asking the user to guess until they get it right. Keep adding
-        //1 for every guess the user does.
-        numGuesses = 0;
-        //return numGuesses.
-        return numGuesses;
-    }
-    private static String displayOutput() {
-        //take in one parameter: the number of guesses.
+    //take in one parameter: the number of guesses.
+    private static String displayOutput(int guess) {
+        if(guess == 0){
+            //this statement is if somehow the input got past the validInput function.
+            return "Incorrect input.";
+        }
         //return the output String.
-        return "";
+        return "You got it in " + guess +  " guesses!";
     }
-
 }
