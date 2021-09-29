@@ -13,25 +13,36 @@ import java.util.Scanner;
 //Store the possible choices in a list and select one at random.
 public class Solution33 {
     public static final Scanner in = new Scanner(System.in);
-    private static String question;
-    private static String result;
     public static void main(String[] args) {
         //Prompt the user for a question.
-        question = askQuestion();
+        String question = askQuestion("What is your question?");
+        System.out.println(question);
         //Call a displayAnswer method that will display one of the 4 answers (specified above) at random.
-        result = displayAnswer();
+        String result = displayAnswer();
+        //print the result.
+        System.out.println(result);
     }
-    private static String askQuestion() {
+    private static String askQuestion(String prompt) {
         //take in one parameter: the prompt.
         //print out the prompt.
+        System.out.println(prompt);
         //return the user input.
-        return "";
+        return "> " + in.nextLine();
     }
     private static String displayAnswer() {
         //take in no parameters.
         //Store the four possible answers into an ArrayList.
         ArrayList<String> choice = new ArrayList<>();
+        choice.add(0,"Yes.");
+        choice.add(1,"No.");
+        choice.add(2,"Maybe.");
+        choice.add(3,"Ask again later.");
+        //use a random number generator to determine the index that should be returned.
+        int max = 4;
+        int min = 1;
+        int range = max - min + 1;
         //using Math.rand, return one of the four choices.
-        return "";
+        int rand = (int)(Math.random() * range);
+        return choice.get(rand);
     }
 }
