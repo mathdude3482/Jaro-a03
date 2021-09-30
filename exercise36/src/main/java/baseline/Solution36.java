@@ -23,16 +23,13 @@ import java.util.regex.Pattern;
 public class Solution36 {
     private static final Scanner in = new Scanner(System.in);
     private static final ArrayList<String> numbers = new ArrayList<>();
-    private static double average;
-    private static double min;
-    private static double max;
-    private static double stdev;
     public static void main(String[] args) {
         //Ask the user for a number. Do this in a do-while loop.
         //enter the do-while loop here.
         String data = "";
         boolean controlLoop = true;
         do{
+           //get the data here.
             data = getData("Enter a number: ");
             boolean valid = checkData(data);
             if (!valid){
@@ -61,12 +58,12 @@ public class Solution36 {
 
         //Call the functions of the Calculate class
         //and store them into either integers or doubles.
-        if(numbers.size() != 0)
+        if(!numbers.isEmpty())
         {
-            average = Calculate.getAverage(newList);
-            min = Calculate.getMinimum(newList);
-            max = Calculate.getMaximum(newList);
-            stdev = Calculate.getstDeviation(newList, average);
+            double average = Calculate.getAverage(newList);
+            double min = Calculate.getMinimum(newList);
+            double max = Calculate.getMaximum(newList);
+            double stdev = Calculate.getstDeviation(newList, average);
             System.out.println();
             final String REPEAT = "%s%.2f%n";
             System.out.printf(REPEAT,"The average is ", average);
