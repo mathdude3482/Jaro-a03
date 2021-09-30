@@ -1,5 +1,8 @@
 package baseline;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /*
@@ -15,32 +18,49 @@ import java.util.Scanner;
 //Some languages require that you define the length of the array ahead of time.
 // You may need to find another data structure, like an ArrayList.
 public class Solution35 {
-    public static final Scanner in = new Scanner(System.in);
+    private static final Scanner in = new Scanner(System.in);
+    private static final Random rand = new Random();
+    private static ArrayList<String> names = new ArrayList<>();
     public static void main(String[] args) {
-        //Use a while loop.
+        //Use a do-while loop.
         //Ask for the names of contestants until there is a blank answer.
-        String name = getName();
-        //Using a For Loop, Add these names into a ArrayList.
-        //if name is left blank, end the while loop.
+        String name;
+        do{
+            name = getName("Enter a name: ");
+            names.add(name);
+        }while(!(name.equals("")));
+        //remove the empty entry.
+        names.remove("");
         //Call getWinner to determine the winner.
-        String winner = getWinner();
+        String winner = getWinner(names);
         //Display the winner.
-        String display = displayWinner();
+        String display = displayWinner(winner);
+        System.out.println(display);
     }
-    private static String getName() {
+    private static String getName(String prompt) {
         //take in one parameter: the prompt.
         //print out the prompt.
+        System.out.print(prompt);
         //return the user input.
-        return "";
+        return in.nextLine();
     }
-    private static String getWinner() {
+    private static String getWinner(ArrayList <String> names) {
         //take in one parameter: the ArrayList of Names.
         //use a random number generator to determine who wins.
-        return "";
+        //return the winner.
+        return names.get(chooseIndex(names));
     }
-    private static String displayWinner(){
+    public static int chooseIndex(List<String> names){
+        //take in one parameter: the list of names.
+        //set the range.
+        int max = names.size();
+        int min = 1;
+        //return a random integer within the range.
+        return rand.nextInt(max - min + 1);
+    }
+    private static String displayWinner(String winner){
         //take in one parameter: the name of the winner.
         //return the output string displaying who won.
-        return "";
+        return "The winner is... " + winner + ".";
     }
 }
