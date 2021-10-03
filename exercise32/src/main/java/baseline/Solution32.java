@@ -1,9 +1,5 @@
 package baseline;
 import java.util.Scanner;
-import static baseline.GetData.*;
-import static baseline.PlayGame.*;
-import static baseline.ValidateInput.validInput;
-
 /*
  *  UCF COP3330 Fall 2021 Assignment 3 Solutions
  *  Copyright 2021 James Jaro
@@ -24,15 +20,18 @@ public class Solution32 {
     public static void main(String[] args) {
         //use a while loop to run the program.
         // The while loop runs while a control variable x is less than 1.
+        Solution32 myApp = new Solution32();
         System.out.println("Let's play guess the number!");
         System.out.println();
         int x = 0;
         //enter the while loop here.
         while(x < 1){
         //prompt the user for a difficulty.
-        String difficulty = getDifficulty("Enter a difficulty(1, 2, or 3):");
+            GetData myData = new GetData();
+            ValidateInput myInput = new ValidateInput();
+            String difficulty = myData.getDifficulty("Enter a difficulty(1, 2, or 3):");
         //check the user input for difficulty if it is 1, 2, or 3.
-        if(!(validInput(difficulty)))
+        if(!(myInput.validInput(difficulty)))
             {
                 //If the input does not check out to be 1,2 or 3 (or some combination of the values),
                 // keep asking the user to input a correct value.
@@ -44,44 +43,49 @@ public class Solution32 {
                 //turn the String into an integer.
                 //take out any whitespaces if there is any.
                 String revisedDifficulty = difficulty.replaceAll("\\s", "");
-                int level = convertDifficulty(revisedDifficulty);
+                int level = myData.convertDifficulty(revisedDifficulty);
                 // call the difficultyLevel method. This will return the number of guesses a user
                 //needed to guess the correct answer.
-                int numGuess = difficultyLevel(level);
+                int numGuess = myApp.difficultyLevel(level);
                 //Display the number of guesses a user needed using the displayOutput method.
-                String result = displayOutput(numGuess);
+                String result = myApp.displayOutput(numGuess);
                 System.out.println(result);
                 //ask if the user wants to play again.
                 Scanner again = new Scanner(System.in);
                 System.out.println();
                 System.out.print("Do you want to play again? (Y/N)");
                 String play = again.nextLine();
-                //if the user doesn't want to play again,
-                // add 1 to the control variable of the while loop to stop the program.
-                if(play.equals("N") || play.equals("n")){
-                 x++;
+                //if the user wants to keep playing, keep x at 0.
+                if(play.equals("Y") || play.equals("y")){
+                    x = 0;
+                }
+                //otherwise, add 1 and end the program.
+                else{
+                    x++;
                 }
             }
         }
     }
+
     //pass in one parameter: the difficulty level.
-    private static int difficultyLevel(int level) {
+    private int difficultyLevel(int level) {
+        PlayGame myGame = new PlayGame();
         //based on the difficulty level, the program will call a function from PlayGame that goes with
         //the corresponding difficulty.
         if(level == 1){
-            return level1();
+            return myGame.level1();
         }
         else if(level == 2){
-            return level2();
+            return myGame.level2();
         }
         else if(level == 3){
-            return level3();
+            return myGame.level3();
         }
         //return 0 if level is not 1, 2, or 3, to indicate that the input is invalid.
         return 0;
     }
     //take in one parameter: the number of guesses.
-    private static String displayOutput(int guess) {
+    private String displayOutput(int guess) {
         if(guess == 0){
             //this statement is if somehow the input got past the validInput function.
             return "Incorrect input.";
