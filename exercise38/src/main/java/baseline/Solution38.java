@@ -13,43 +13,62 @@ import java.util.Scanner;
 public class Solution38 {
    private static Solution38 app = new Solution38();
     public static void main(String[] args) {
-        //Ask the user for a list of numbers, seperated by spaces.
+        //Ask the user for a list of numbers, separated by spaces.
+        String getList = app.getInfo("Enter a list of numbers, separated by spaces: ");
+        //create a string array that takes care of any whitespace the user inputs.
+        String[] numArray = getList.split("\\s+");
         //Store the integers into an ArrayList of integers called oldList.
-        List <Integer> oldList = app.getNumber();
-        //Convert the strings into integers.
+        List <Integer> oldList = app.getNumber(numArray);
         //Call a function called filterEvenNumbers that will filter out the even numbers.
-        List <Integer> newList = app.filterEvenNumbers();
+        List <Integer> newList = app.filterEvenNumbers(oldList);
         //Display the even numbers.
+        app.displayEvenNumbers(newList);
     }
-    private String getInfo(){
+    //take one parameter: the prompt.
+    private String getInfo(String prompt){
         Scanner in = new Scanner(System.in);
-        //take one parameter: the prompt.
         //print out the prompt.
+        System.out.print(prompt);
         //return the user input.
-        return "";
+        return in.nextLine();
     }
-    private List <Integer> getNumber() {
-        //take in no parameters.
+    private List <Integer> getNumber(String[] numArray) {
+        //take in 1 parameter: an array of numbers that are String type.
         //return the list of integers.
         List<Integer> numList = new ArrayList<>();
-        //create a string array that takes care of any whitespace the user inputs.
         //using a for loop that runs from 0 to the length of the string array, add the elements.
+        for ( int x = 0; x < numArray.length; x++){
+            //store each number into a temp variable.
+            String temp = numArray[x];
+            //convert the strings into an integer and add them into numList.
+            numList.add(Integer.parseInt(temp));
+        }
         //return numList.
         return numList;
     }
-    private List<Integer> filterEvenNumbers() {
+    private List<Integer> filterEvenNumbers(List<Integer> firstList) {
         //take in one parameter: the List of the inputted numbers the user provides.
         //create a new List called even that stores even numbers.
         List<Integer> even = new ArrayList<>();
+        int length = firstList.size();
         //using a for loop that runs from 0 to the size of the list, determine which numbers are even.
-        //if a number is even, add it to the even list.
+        for (int x = 0; x < length; x++){
+            //if a number is even, add it to the even list.
+            if (isEven(firstList.get(x)))
+                even.add(firstList.get(x));
+        }
         //return the even list.
         return even;
     }
-    private boolean isEven(){
+    private boolean isEven(int num){
         //take in one parameter: a number.
-        //determine if the number is even using modulus.
-        //return true if the number is even.
-        return true;
+        //return a truth value based on if the number is even or not.
+        return num % 2 == 0;
+    }
+    private void displayEvenNumbers(List<Integer> even) {
+        //take in one parameter: the list of even numbers.
+        System.out.println("The even numbers are: ");
+        for (int x: even)
+            System.out.print(x + " ");
     }
 }
