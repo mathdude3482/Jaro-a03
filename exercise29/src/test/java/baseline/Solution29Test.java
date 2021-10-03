@@ -9,15 +9,17 @@ class Solution29Test {
     @Test
     void isValid() {
         String testinput = "12";
-        String testinput2 = "12avc";
         boolean expected = true;
-        boolean expected2 = false;
         boolean actual = app.isValid(testinput);
-        boolean actual2 = app.isValid(testinput2);
         assertEquals(expected, actual);
+    }
+    @Test
+    void isValid2(){
+        String testinput2 = "12av#c";
+        boolean expected2 = false;
+        boolean actual2 = app.isValid(testinput2);
         assertEquals(expected2,actual2);
     }
-
     @Test
     void convertRate() {
         String testinput = "12";

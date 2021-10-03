@@ -17,14 +17,15 @@ import java.util.regex.Pattern;
 public class Solution29 {
     private static final Scanner in = new Scanner(System.in);
     private static String rate;
+    private static Solution29 app = new Solution29();
     public static void main(String[] args) {
        // using a while loop, ask for the rate of return.
         // Don't allow the user to exit the while loop until they enter a valid number.
         //enter while loop here.
         int x = 0;
         while(x < 1){
-            rate = getNum("What is the rate of return?");
-            if(!isValid(rate)){
+            rate = app.getNum("What is the rate of return?");
+            if(!app.isValid(rate)){
               System.out.println("Sorry. That's not a valid input.");
             }
             else{
@@ -32,20 +33,20 @@ public class Solution29 {
             }
         }
         //call a convertRate method to turn the rate into a double.
-        double numrate = convertRate(rate);
+        double numrate = app.convertRate(rate);
        // call a calculate method to calculate the number of years.
-        double numYears = calculate(numrate);
+        double numYears = app.calculate(numrate);
        // print the result.
-        String outcome = displayOutput(numYears);
+        String outcome = app.displayOutput(numYears);
         System.out.println(outcome);
     }
-    private static String getNum(String prompt) {
+    private String getNum(String prompt) {
         //pass in one parameter: the prompt. Print out the prompt.
         System.out.print(prompt);
         //return the user input.
         return in.nextLine();
     }
-    public static boolean isValid(String rate) {
+    public boolean isValid(String rate) {
         //pass in one parameter: the rate as a string.
         //determine if the given String is valid.
         boolean determine = true;
@@ -55,7 +56,7 @@ public class Solution29 {
         else{
             //if there is any whitespace, remove it.
             String revisedrate = rate.replaceAll("\\s", "");
-            String regex = "^(?=.*[a-zA-Z])" + "(?=\\S+$).{1,100}$";
+            String regex = "^(?=.*[^0-9])" + "(?=\\S+$).{1,100}$";
             Pattern ratePattern = Pattern.compile(regex);
             Matcher matchrate = ratePattern.matcher(revisedrate);
             if(matchrate.matches()){
@@ -66,17 +67,17 @@ public class Solution29 {
                 return determine;
         }
     }
-    public static double convertRate(String rate) {
+    public double convertRate(String rate) {
         //take in one parameter: the rate as a String.
         //convert the String into an integer.
         return Double.parseDouble(rate);
     }
-    public static double calculate(double ratevalue) {
+    public double calculate(double ratevalue) {
         //pass in one parameter: the rate as an integer.
         //return the number of years.
         return 72.00 / ratevalue;
     }
-    private static String displayOutput(double numYears) {
+    private String displayOutput(double numYears) {
         //pass in one parameter: the number of years.
         //round numYears to two decimal points.
         DecimalFormat value = new DecimalFormat("##.00");
