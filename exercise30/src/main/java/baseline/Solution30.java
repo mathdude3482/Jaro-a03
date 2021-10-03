@@ -7,14 +7,15 @@ package baseline;
 //Use a nested loop to complete this program.
 //Align each column within the table without using the tab character.
 public class Solution30 {
+    private static Solution30 app = new Solution30();
     public static void main(String[] args) {
        //declare a int variable tableSize. Set it to 12.
         int tableSize = 12;
        //call a multiplicationTable class that will return a 12 by 12 multiplication table.
-        multiplicationTable(tableSize);
+        app.multiplicationTable(tableSize);
     }
 
-    private static void multiplicationTable(int tableSize) {
+    private void multiplicationTable(int tableSize) {
         //this function takes in one parameter: the tableSize.
         //use two for loops. Both run from 1 to tableSize, inclusive.
         //this loop determines the left most column of the multiplication table.
@@ -23,14 +24,14 @@ public class Solution30 {
             //This loop calculates the rest of the multiplication table.
             for (int z = 1; z <= tableSize; z++){
                 //call the multiply function to calculate the product.
-                System.out.format("%4d", multiply(y,z));
+                System.out.format("%4d", app.multiply(y,z));
             }
         }
         //print out the multiplication table.
         System.out.println();
     }
 
-    public static int multiply(int x, int y){
+    public int multiply(int x, int y){
         //take in two parameters: two integers.
         //Return the product of the two integers.
         return x * y;
