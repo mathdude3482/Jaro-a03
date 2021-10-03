@@ -29,7 +29,8 @@ public class PlayGame {
         //declare numGuesses to keep count of the number of guesses a user takes.
         numGuesses = 0;
         int x = 0;
-        computeranswer = random.nextInt(10) + 1;
+        computeranswer = getComputeranswer();
+
         System.out.print(prompt);
         while(x < 1) {
             String myanswer = guess.nextLine();
@@ -55,10 +56,15 @@ public class PlayGame {
         }
         return numGuesses;
     }
+
+    public int getComputeranswer() {
+        return random.nextInt(10) + 1;
+    }
+
     public int level2() {
         numGuesses = 0;
         int x = 0;
-        computeranswer = random.nextInt(100) + 1;
+        computeranswer = getComputerAnswer2();
         System.out.print(prompt);
         while(x < 1) {
             String myanswer = guess.nextLine();
@@ -84,10 +90,15 @@ public class PlayGame {
         }
         return numGuesses;
     }
+
+    public int getComputerAnswer2() {
+        return random.nextInt(100) + 1;
+    }
+
     public int level3() {
         numGuesses = 0;
         int x = 0;
-        computeranswer = random.nextInt(1000) + 1;
+        computeranswer = getComputerAnswer3();
         System.out.print(prompt);
         while(x < 1) {
             String myanswer = guess.nextLine();
@@ -112,5 +123,9 @@ public class PlayGame {
             }
         }
         return numGuesses;
+    }
+
+   public int getComputerAnswer3() {
+        return random.nextInt(1000) + 1;
     }
 }

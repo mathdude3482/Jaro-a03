@@ -1,6 +1,7 @@
 package baseline;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -14,9 +15,10 @@ import java.util.Scanner;
 //Use an array or list to store the names.
 public class Solution34 {
     //Create an ArrayList that contains a list of names.
-    private static ArrayList <String> name = new ArrayList<>();
+    private static List <String> name = new ArrayList<>();
     private static final Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
+        Solution34 app = new Solution34();
         //add names to the ArrayList.
         name.add(0,"John Smith");
         name.add(1,"Jackie Jackson");
@@ -24,7 +26,7 @@ public class Solution34 {
         name.add(3,"Amanda Cullen");
         name.add(4,"Jeremy Goodwin");
         //Call a getSize method that will get the size of the list.
-        int size = getSize(name);
+        int size = app.getSize(name);
         //Print out the initial list, with each name on its own line. Use a for loop here.
         System.out.println("There are " + size + " names:");
         for(int i = 0; i < size; i++)
@@ -32,13 +34,13 @@ public class Solution34 {
         //empty print statements to match the format of the output.
         System.out.println();
         //call a removeName method that will remove a name from the list.
-        String remove = takeOutName("Enter an employee name to remove:");
+        String remove = app.takeOutName("Enter an employee name to remove:");
         System.out.println();
         //declare a new list called newlist that will be used to store the new list of names
         // after removal of a name.
-        ArrayList <String> newlist = removeName(name, remove);
+        List<String> newlist = app.removeName(name, remove);
         //get the size of newList.
-        int newsize = getSize(newlist);
+        int newsize = app.getSize(newlist);
         if(newsize == size)
         {
             //if the size is the same, do not print out the list again.
@@ -54,12 +56,12 @@ public class Solution34 {
                 }
         }
     }
-    public static int getSize(ArrayList<String> names) {
+    public int getSize(List<String> names) {
         //take in one parameter: the list of names.
         //return the size of the array.
         return names.size();
     }
-    private static String takeOutName(String prompt) {
+    private String takeOutName(String prompt) {
         //take in one parameter: the prompt.
         //print out the prompt.
         System.out.print(prompt);
@@ -67,7 +69,7 @@ public class Solution34 {
         return in.nextLine();
     }
     //take in two parameters: the list of names and the name the user wants removed.
-    public static ArrayList<String> removeName(ArrayList<String> names, String removeName) {
+    public List<String> removeName(List<String> names, String removeName) {
         //remove any whitespace from the user input.
         String newremoveName = removeName.replaceAll("\\s", "");
         //if the name exists, remove the name from the arrayList.
@@ -76,7 +78,7 @@ public class Solution34 {
             String newName = names.get(i).replaceAll("\\s", "");
             if (newName.equalsIgnoreCase(newremoveName))
             {
-                names.remove(i);
+                names.remove(removeName);
                 return names;
             }
         }
@@ -84,5 +86,4 @@ public class Solution34 {
         //return the array.
         return names;
     }
-
 }

@@ -19,46 +19,54 @@ import java.util.Scanner;
 // You may need to find another data structure, like an ArrayList.
 public class Solution35 {
     private static final Scanner in = new Scanner(System.in);
-    private static final Random rand = new Random();
     private static ArrayList<String> names = new ArrayList<>();
+    private Random rand;
+    public Solution35(){
+        rand = new Random();
+    }
+    public Solution35(boolean state, String name){
+        names.add(name);
+        if(state) {
+            rand = new Random(1);
+        }
+    }
     public static void main(String[] args) {
+        Solution35 myApp = new Solution35();
         //Use a do-while loop.
         //Ask for the names of contestants until there is a blank answer.
         String name;
         do{
-            name = getName("Enter a name: ");
+            name = myApp.getName("Enter a name: ");
             names.add(name);
         }while(!(name.equals("")));
         //remove the empty entry.
         names.remove("");
         //Call getWinner to determine the winner.
-        String winner = getWinner(names);
+        String winner = myApp.getWinner(names);
         //Display the winner.
-        String display = displayWinner(winner);
+        String display = myApp.displayWinner(winner);
         System.out.println(display);
     }
-    private static String getName(String prompt) {
+    private String getName(String prompt) {
         //take in one parameter: the prompt.
         //print out the prompt.
         System.out.print(prompt);
         //return the user input.
         return in.nextLine();
     }
-    private static String getWinner(ArrayList <String> names) {
+    private String getWinner(ArrayList <String> names) {
         //take in one parameter: the ArrayList of Names.
         //use a random number generator to determine who wins.
         //return the winner.
         return names.get(chooseIndex(names));
     }
-    public static int chooseIndex(List<String> names){
+    public int chooseIndex(List<String> names){
         //take in one parameter: the list of names.
         //set the range.
-        int max = names.size();
-        int min = 1;
         //return a random integer within the range.
-        return rand.nextInt(max - min + 1);
+        return rand.nextInt(names.size());
     }
-    private static String displayWinner(String winner){
+    private String displayWinner(String winner){
         //take in one parameter: the name of the winner.
         //return the output string displaying who won.
         return "The winner is... " + winner + ".";
