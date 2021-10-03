@@ -1,10 +1,5 @@
 package baseline;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
-
+import java.util.*;
 /*
  *  UCF COP3330 Fall 2021 Assignment 3 Solutions
  *  Copyright 2021 James Jaro
@@ -52,12 +47,11 @@ public class Solution39 {
         firstMap.put("Webber", entry6);
         //use a function called sortbyLastName to sort the entries by their last name.
         //display an organized table of each entry organized by last name.
-        System.out.println("Name \t\t\t\t| Position \t\t\t\t| Separation Date");
-        System.out.println("--------------------|-----------------------|----------------");
+        System.out.println("Name \t\t\t\t| Position \t\t\t | Separation Date");
+        System.out.println("--------------------|--------------------|----------------");
         app.sortbyLastName();
     }
-
-    public void sortbyLastName() {
+    private void sortbyLastName() {
         //take in no parameters.
         //create a TreeMap called newMap. This map needs a string and an ArrayList of strings.
         TreeMap<String, ArrayList<String>> newMap = new TreeMap<>();
@@ -66,9 +60,21 @@ public class Solution39 {
         //using an enchanced for loop, print out each entry, organized by last name.
         for(Map.Entry<String, ArrayList<String>> value : newMap.entrySet()){
             ArrayList <String> temp = value.getValue();
-            System.out.format("%s %s\t| %s\t\t\t\t\t|\t\t%s", temp.get(0), value.getKey(),
-                    temp.get(1), temp.get(2));
-            System.out.println();
+            StringBuilder myString = new StringBuilder(temp.get(0)).append(" ").append(value.getKey());
+            while(myString.length() < 20){
+                myString.append(" ");
+            }
+            System.out.printf("%s| ", myString);
+            myString = new StringBuilder(temp.get(1));
+            while(myString.length() < 19){
+                myString.append(" ");
+            }
+            System.out.printf("%s| ", myString);
+            myString = new StringBuilder(temp.get(2));
+            while(myString.length() < 19){
+                myString.append(" ");
+            }
+            System.out.printf("%s %n", myString);
         }
     }
 }
