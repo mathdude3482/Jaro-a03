@@ -23,7 +23,6 @@ public class Solution25 {
     private String password;
     private String displayresult;
     private int determinenum;
-    public static final int PASSWORD_LENGTH = 8;
     public static void main(String[] args) {
         Solution25 app = new Solution25();
         //ask the user for a password.
@@ -34,46 +33,57 @@ public class Solution25 {
         app.displayresult = app.displayoutput(app.password, app.determinenum);
         System.out.println(app.displayresult);
     }
-        //take in a prompt as the parameter.
+
+    //take in a prompt as the parameter.
     private String getPassword(String prompt) {
         //print out the prompt.
         System.out.println(prompt);
         //read in the user password and return it.
         return in.nextLine();
     }
+
     //take in the password as a parameter.
     public int passwordValidator(String password) {
         //declare an integer strength to determine how strong the password is.
         int strength = 0;
         //determine if the password is very weak, weak, strong, or very strong.
         //this is if the password is very weak.
-        final String NUM = "^(?=.*[0-9])";
-        String regex1 =  NUM + "(?=\\S+$).{1,8}$";
-        Pattern p = Pattern.compile(regex1);
-        Matcher m = p.matcher(password);
-        if (m.matches()){
-            strength = 1;
-        }
-        //this is if the password is weak.
-        String regex2 = "^(?=.*[a-z])" + "(?=\\S+$).{1,8}$";
-        Pattern p2 = Pattern.compile(regex2);
-        Matcher m2 = p2.matcher(password);
-        if (m2.matches()){
-            strength = 2;
-        }
-        //this is if the password is strong.
-        String regex3 = NUM + "(?=.*[a-z])" + "(?=\\S+$).{8,20}$";
-        Pattern p3 = Pattern.compile(regex3);
-        Matcher m3 = p3.matcher(password);
-        if(m3.matches()){
-            strength = 3;
-        }
-        //this is if the password is very strong.
-        String regex4 = NUM + "(?=.*[a-z])" + "(?=.*[!@#$%^&+=])" + "(?=\\S+$).{8,20}$";
-        Pattern p4 = Pattern.compile(regex4);
-        Matcher m4 = p4.matcher(password);
-        if(m4.matches()){
-            strength = 4;
+        if(true) {
+            final String NUM = "^(?=.*[0-9])";
+            String regex1 = NUM + "(?=\\S+$).{1,8}$";
+            Pattern p = Pattern.compile(regex1);
+            Matcher m = p.matcher(password);
+            //this is if the password is weak.
+            String regex2 = "^(?=.*[a-zA-Z])" + "(?=\\S+$).{1,8}$";
+            Pattern p2 = Pattern.compile(regex2);
+            Matcher m2 = p2.matcher(password);
+            //this is if the password is strong.
+            String regex3 = NUM + "(?=.*[a-zA-Z])" + "(?=\\S+$).{8,20}$";
+            Pattern p3 = Pattern.compile(regex3);
+            Matcher m3 = p3.matcher(password);
+            //this is if the password is very strong.
+            String regex4 = NUM + "(?=.*[a-zA-Z])" + "(?=.*[^a-zA-Z0-9])" +
+                    "(?=\\S+$).{8,20}$";
+            Pattern p4 = Pattern.compile(regex4);
+            Matcher m4 = p4.matcher(password);
+            if (m.matches()) {
+                strength = 1;
+                return strength;
+            }
+            else if (m2.matches()) {
+                strength = 2;
+                return strength;
+            }
+            else if (m3.matches()) {
+                strength = 3;
+                return strength;
+            }
+            else if (m4.matches()) {
+                strength = 4;
+                return strength;
+            }
+            else
+                strength = 0;
         }
         //return an integer designating the strength of the password.
         return strength;
@@ -85,20 +95,17 @@ public class Solution25 {
         //declare a String result that will change based on the integer passed in.
         String result = "";
         final String PARTRESULT = "The password '";
-        if (determinevalue == 1){
+        if (determinevalue == 1) {
             result = PARTRESULT + password + "'" + " is a very weak password.";
-        }
-        else if(determinevalue == 2){
+        } else if (determinevalue == 2) {
             result = PARTRESULT + password + "'" + " is a weak password.";
-        }
-        else if (determinevalue == 3){
+        } else if (determinevalue == 3) {
             result = PARTRESULT + password + "'" + " is a strong password.";
-        }
-        else if (determinevalue == 4)
+        } else if (determinevalue == 4)
             result = PARTRESULT + password + "'" + " is a very strong password.";
-        //if not one of the four predetermined values, return nothing.
+            //if not one of the four predetermined values, return an unknown strength.
         else
-            result = "";
+            result =  PARTRESULT + password + "'" + "is a password of unknown strength.";
         //return result.
         return result;
     }
