@@ -11,30 +11,31 @@ import java.util.Scanner;
 public class Solution28 {
     private static final Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
+        Solution28 app = new Solution28();
         //Using a for loop, ask the user for 5 numbers.
         //enter for loop here:
         int[] num = new int[5];
         for (int i = 0; i <= 4; i++) {
-          num[i] = getNum("Enter a number:");
+          num[i] = app.getNum("Enter a number:");
         }
         //Calculate the sum of the 5 numbers.
-        int sum = getSum(num);
+        int sum = app.getSum(num);
         //Display the sum.
-        String result = displaySum(sum);
+        String result = app.displaySum(sum);
         System.out.println(result);
     }
-    private static int getNum(String prompt) {
+    private int getNum(String prompt) {
         //pass in the prompt. Print out the prompt.
         System.out.print(prompt);
         //return the user input.
         return in.nextInt();
     }
-    public static int getSum(int[] num) {
+    public int getSum(int[] num) {
         //pass in 5 parameters: the 5 numbers the user inputted.
         //return the sum.
         return num[0] + num[1] + num[2] + num[3] + num[4];
     }
-    private static String displaySum(int sum){
+    private String displaySum(int sum){
         //pass in one parameter: the sum.
         //return the result string.
         return "The total is " + sum + ".";
