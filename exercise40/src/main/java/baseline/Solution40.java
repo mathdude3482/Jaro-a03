@@ -1,51 +1,87 @@
 package baseline;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.*;
 /*
  *  UCF COP3330 Fall 2021 Assignment 3 Solutions
  *  Copyright 2021 James Jaro
  */
-//Given the following data set create a program that lets a user locate all records that
-// match the search string by comparing the search string to the first or last name field.
+//Given the following data set, create a program
+// that sorts all employees by last name and prints them to the screen in a tabular format.
 //Store the data using a list of maps.
 public class Solution40 {
-    // Create two hashmaps: one for the first name and one for the last name.
     private static Solution40 app = new Solution40();
-    private static Map<String, ArrayList<String>> firstNameMap = new HashMap<>();
-    private static Map<String, ArrayList<String>> lastNameMap = new HashMap<>();
-    public static void main(String[] args){
+    private static Map<String, ArrayList<String>> lastName = new HashMap<>();
+    public static void main(String[] args) {
         //Create lists for each entry.
-        //Include in each list: the position and the date of separation.
-        //Store the first name and the last name into their respective hashmaps.
-        //Call a function getString which asks for a search String.
-        String search = app.getString();
-        //call a function findName which will find a name that contains the search String.
-        app.findName();
-        //call a function display to display the output.
-        System.out.println("Name \t\t\t\t| Position \t\t\t\t| Separation Date");
-        System.out.println("--------------------|-----------------------|----------------");
-        app.display();
+        ArrayList<String> entry1 = new ArrayList<>();
+        ArrayList<String> entry2 = new ArrayList<>();
+        ArrayList<String> entry3 = new ArrayList<>();
+        ArrayList<String> entry4 = new ArrayList<>();
+        ArrayList<String> entry5 = new ArrayList<>();
+        ArrayList<String> entry6 = new ArrayList<>();
+        //Include in each array:
+        // the first name, the position, and the separation date.
+        entry1.add("John");
+        entry1.add("Manager");
+        entry1.add("2016-12-31");
+        entry2.add("Tou");
+        entry2.add("Software Engineer");
+        entry2.add("2016-12-31");
+        entry3.add("Michaela");
+        entry3.add("District Manager");
+        entry3.add("2015-12-19");
+        entry4.add("Jake");
+        entry4.add("Programmer");
+        entry4.add("");
+        entry5.add("Jacquelyn");
+        entry5.add("DBA");
+        entry5.add("");
+        entry6.add("Sally");
+        entry6.add("Web Developer");
+        entry6.add("2015-12-18");
+        //Put the last name of each entry as well as what list they belong to into the hashmap.
+        lastName.put("Johnson", entry1);
+        lastName.put("Xiong", entry2);
+        lastName.put("Michaelson", entry3);
+        lastName.put("Jacobson", entry4);
+        lastName.put("Jackson", entry5);
+        lastName.put("Webber", entry6);
+        //use a function called sortbyLastName to sort the entries by their last name.
+        String search = app.getString("Enter a search string: ");
+        //display an organized table of each entry organized by last name.
+        System.out.println("Name \t\t\t\t| Position \t\t\t | Separation Date");
+        System.out.println("--------------------|--------------------|----------------");
+        app.sortbyName(search);
     }
-
-    private void display() {
-        //take in no parameters.
-        //based on the search string, print out the name of anyone who contains the string
-        //along with their respective data.
-    }
-
-    private void findName() {
-        //take in 1 parameter: the user input.
-        //based on the user input, find the names containing that string within the hashMap.
-    }
-
-    //take in one parameter: the prompt.
-    private String getString() {
+    private String getString(String prompt){
+        Scanner in = new Scanner(System.in);
         //print out the prompt.
-        //return user input.
-        return "";
+        System.out.print(prompt);
+        return in.nextLine();
     }
-
+    public void sortbyName(String search) {
+        //take in no parameters.
+        //create a TreeMap called newMap. This map needs a string and an ArrayList of strings.
+        TreeMap<String, ArrayList<String>> newMap = new TreeMap<>();
+        //within newMap, put all the entries of map into treeMap.
+        newMap.putAll(lastName);
+        //using an enchanced for loop, print out each entry, organized by last name.
+        for(Map.Entry<String, ArrayList<String>> value : newMap.entrySet()){
+            ArrayList <String> temp = value.getValue();
+            StringBuilder myString = new StringBuilder(temp.get(0)).append(" ").append(value.getKey());
+            while(myString.length() < 20){
+                myString.append(" ");
+            }
+            System.out.printf("%s| ", myString);
+            myString = new StringBuilder(temp.get(1));
+            while(myString.length() < 19){
+                myString.append(" ");
+            }
+            System.out.printf("%s| ", myString);
+            myString = new StringBuilder(temp.get(2));
+            while(myString.length() < 19){
+                myString.append(" ");
+            }
+            System.out.printf("%s %n", myString);
+        }
+    }
 }
