@@ -1,7 +1,5 @@
 package baseline;
-
 import java.util.*;
-
 /*
  *  UCF COP3330 Fall 2021 Assignment 3 Solutions
  *  Copyright 2021 James Jaro
@@ -15,6 +13,14 @@ import java.util.*;
 //Ensure that there are at least as many letters are there are special characters and numbers.
 public class Solution37 {
     private Random rand = new Random();
+    public Solution37(){
+
+    }
+    public Solution37(boolean state){
+        if (state){
+            rand = new Random(1);
+        }
+    }
     public static void main(String[] args) {
         Solution37 app = new Solution37();
         //Ask the user for the minimum length of the password,
@@ -24,6 +30,7 @@ public class Solution37 {
         int numNumbers = app.getInfo("How many numbers? ");
         //Call a function getPassword that returns the password based on the specifications.
         List<Character> getpassword = app.getPassword(length, numSpecial, numNumbers);
+        //comvert the password to a string.
         String password = app.convertPassword(getpassword);
         //Print out the password.
         String display = app.displayPassword(password);
@@ -43,9 +50,9 @@ public class Solution37 {
         Solution37 app = new Solution37();
         //take in three parameters: the length, the number of digits,
         // and the number of special characters.
-        //store the characters used to make a password into an ArrayList.
         int numletters = length - specialChar - numNumbers;
         while (numletters < specialChar + numNumbers) {
+            //continue adding letters until numLetters = specialChar + numNumbers.
             numletters++;
         }
         List <Character> password = new ArrayList<>();
@@ -65,11 +72,10 @@ public class Solution37 {
             }
         }
         Collections.shuffle(password);
-        //Ensure that the password has as many letters as numbers and special characters.
-        //return the randomly generated password.
         return password;
     }
     private String convertPassword(List <Character> password){
+        //convert the password into a string.
         StringBuilder temp = new StringBuilder();
         for (char x: password)
         {
@@ -77,24 +83,29 @@ public class Solution37 {
         }
         return temp.toString();
     }
-    private char getDigit() {
+    public char getDigit() {
+        //get a random digit from 0-9.
         return (char) (rand.nextInt((57 - 48) + 1) + 48);
     }
 
-    private char chooseSpecial() {
+    public char chooseSpecial() {
+        //get a random special character.
         List<Character> specialSymbol = getSymbol();
         return specialSymbol.get(rand.nextInt(specialSymbol.size()));
     }
 
-    private char chooselowerAlphabet() {
+    public char chooselowerAlphabet() {
+        //get a random lowercase letter.
         return (char) ((rand.nextInt(90 - 65) + 1) + 65);
     }
 
-    private char chooseUpperAlphabet() {
+    public char chooseUpperAlphabet() {
+        //get a random uppercase letter.
         return (char) ((rand.nextInt(122 - 97) + 1) + 97);
     }
 
-    private List<Character> getSymbol() {
+    public List<Character> getSymbol() {
+        //generate the list of special symbols.
         List<Character> newList = new ArrayList<>();
         char[] special = new char[32];
         for (int l = 0; l < 15; l++) {
