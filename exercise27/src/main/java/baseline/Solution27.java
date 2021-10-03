@@ -23,33 +23,34 @@ Use a single output statement to display the outputs.
 */
 public class Solution27 {
     private static final Scanner in = new Scanner(System.in);
+    private static Solution27 app = new Solution27();
     public static void main(String[] args) {
         //ask the user for 4 inputs:
         //the first name, the last name, the zip code, and the employee ID.
-        String firstname = getInfo("Enter the first name:");
-        String lastname = getInfo("Enter the last name:");
-        String zipcode = getInfo("Enter the zipcode:");
-        String id = getInfo("Enter the employee ID:");
+        String firstname = app.getInfo("Enter the first name:");
+        String lastname = app.getInfo("Enter the last name:");
+        String zipcode = app.getInfo("Enter the zipcode:");
+        String id = app.getInfo("Enter the employee ID:");
         //call validateInput, which will validate all the input data using
         //helper functions to validate each input.
-       String valid = validateInput(firstname, lastname, zipcode, id);
+       String valid = app.validateInput(firstname, lastname, zipcode, id);
         //display the appropriate output.
         System.out.println(valid);
     }
-    private static String getInfo(String prompt) {
+    private String getInfo(String prompt) {
         //take in 1 parameter: the prompt. Print out the prompt.
         System.out.print(prompt);
         //return the user input.
         return in.nextLine();
     }
-    public static String validateInput(String first, String last, String zip, String iD) {
+    public String validateInput(String first, String last, String zip, String iD) {
         //take in 4 parameters: the first name, the last name, the id, and the zipcode.
         //define a String result that will be used to store the result of the function.
         //test validity of the inputs using helper functions for each input.
-        int valid1 = validateFirst(first);
-        int valid2 = validateLast(last);
-        int valid3 = validateZip(zip);
-        int valid4 = validateID(iD);
+        int valid1 = app.validateFirst(first);
+        int valid2 = app.validateLast(last);
+        int valid3 = app.validateZip(zip);
+        int valid4 = app.validateID(iD);
         //if first and last are empty:
         if (first.length() == 0){
             valid1 = -1;
@@ -61,7 +62,7 @@ public class Solution27 {
         return displayOutput(valid1, valid2, valid3, valid4);
     }
 
-    public static String displayOutput(int valid1, int valid2, int valid3, int valid4) {
+    private String displayOutput(int valid1, int valid2, int valid3, int valid4) {
         //take in 4 parameters: the results of the validity tests on each input.
         String result = "";
         if(valid1 == -1){
@@ -82,12 +83,14 @@ public class Solution27 {
         if (valid4 == 0){
             result = result + "\nThe employee ID must be in the format of AA-1234.";
         }
-        else
+        //if there are no errors, print this statement out.
+        if(valid1 != -1 && valid2 != -1 && valid1 != 0
+        && valid2 != 0 && valid3 != 0 && valid4 !=0)
             result = result + "\nThere were no errors found.";
         return result;
     }
 
-    private static int validateFirst(String first) {
+    private int validateFirst(String first) {
         //take in 1 parameter: the first name.
         //declare an integer valid that will be used to determine if the String is valid or not.
         int determine = 0;
@@ -103,7 +106,7 @@ public class Solution27 {
         }
         return determine;
     }
-    private static int validateLast(String last) {
+    private int validateLast(String last) {
         //take in 1 parameter: the last name.
         //declare an integer valid that will be used to determine if the String is valid or not.
         int determine = 0;
@@ -119,7 +122,7 @@ public class Solution27 {
         }
         return determine;
     }
-    private static int validateZip(String zipcode) {
+    private int validateZip(String zipcode) {
         //take in 1 parameter: the zip code.
         //if the zip code is valid, determine = 1.
         //otherwise, determine = 0.
@@ -134,7 +137,7 @@ public class Solution27 {
         }
         return determine;
     }
-    private static int validateID(String iD) {
+    private int validateID(String iD) {
         //take in 1 parameter: the ID.
         //if the ID is valid, return 1.
         //otherwise, return 0.
