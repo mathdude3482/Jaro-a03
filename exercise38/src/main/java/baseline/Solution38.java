@@ -46,7 +46,7 @@ public class Solution38 {
         //return numList.
         return numList;
     }
-    private List<Integer> filterEvenNumbers(List<Integer> firstList) {
+    public List<Integer> filterEvenNumbers(List<Integer> firstList) {
         //take in one parameter: the List of the inputted numbers the user provides.
         //create a new List called even that stores even numbers.
         List<Integer> even = new ArrayList<>();
@@ -60,7 +60,7 @@ public class Solution38 {
         //return the even list.
         return even;
     }
-    private boolean isEven(int num){
+    public boolean isEven(int num){
         //take in one parameter: a number.
         //return a truth value based on if the number is even or not.
         return num % 2 == 0;
